@@ -286,7 +286,8 @@ There are two choice for you.
 ```
 
 After that we modify `login\urls.py` to create route to each views
-```from django.conf.urls import url
+```
+from django.conf.urls import url
 
 from . import views
 
