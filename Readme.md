@@ -33,3 +33,18 @@ $cd djangologin
 ```
 djangologin$python manage.py startapp login
 ```
+
+3. Edit Django to use MySQL Database
+In `djangologin\settings.py` edit these part  
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST' : 'localhost',  #You can fill these with your DATABASE Host
+        'NAME': 'login-tutorial',   #You can fill these with your DATABASE name
+        'USER' : 'root', #You can fill these with your user in database
+        'PASSWORD' : '', #You can fill these with your password
+        'PORT' : '3306' #You can fill these with your database port
+    }
+}
+```
