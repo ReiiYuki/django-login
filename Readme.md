@@ -69,3 +69,5 @@ There are two choice for you.
       url(r'^admin/', admin.site.urls),
   ]
   ```
+
+6. 
