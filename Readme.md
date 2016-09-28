@@ -65,9 +65,51 @@ There are two choice for you.
   from django.contrib import admin
 
   urlpatterns = [
-      url(r'^/login',include('login.urls')),
+      url(r'^login/',include('login.urls')),
       url(r'^admin/', admin.site.urls),
   ]
   ```
 
-6. 
+6. Create Simple html
+  Create Directory `login\templates\login` then create file `index.html`
+  ```
+  <!Doctype html>
+  <html>
+  <header>
+    <meta charset="utf-8">
+    <title>Login</title>
+  </header>
+  <body>
+    <h1>Login</h1>
+  </body>
+  </html>
+  ```
+
+  Edit `login\views.py` to render from our `index.html`
+  ```
+  from django.shortcuts import render
+
+  # Create your views here.
+  def index(request) :
+      return render(request,'login/index.html')
+  ```
+
+  Create `login\urls.py` to route url to our views
+  ```
+  from django.conf.urls import url
+
+  from . import views
+
+  app_name = 'login'
+
+  urlpatterns = [
+      url(r'^$', views.index, name='index'),
+  ]
+  ```
+
+  Let run!
+  ```
+  djangologin$python manage.py runserver
+  ```
+
+  Go to <http://localhost:8000/login/> and see what happen!
