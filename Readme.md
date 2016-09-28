@@ -35,7 +35,7 @@ There are two choice for you.
 
 3. Edit Django to use MySQL Database
   In `djangologin\settings.py` edit this part  
-  ```
+  ```python
   DATABASES = {
       'default': {
           'ENGINE': 'django.db.backends.mysql',
@@ -54,13 +54,20 @@ There are two choice for you.
 
 4. Connect your app with your project
   In `djangologin\settings.py` add this
-  ```
+  ```python
   INSTALLED_APPS = [
       'login.apps.LoginConfig', #Connect your login app
+      'django.contrib.admin',
+      'django.contrib.auth',
+      'django.contrib.contenttypes',
+      'django.contrib.sessions',
+      'django.contrib.messages',
+      'django.contrib.staticfiles',
+  ]
   ```
 
 5. Route urls to app urls
-  ```
+  ```python
   from django.conf.urls import url,include
   from django.contrib import admin
 
@@ -72,7 +79,7 @@ There are two choice for you.
 
 6. Create Simple html
   Create Directory `login\templates\login` then create file `index.html`
-  ```
+  ```html
   <!Doctype html>
   <html>
   <header>
@@ -86,7 +93,7 @@ There are two choice for you.
   ```
 
   Edit `login\views.py` to render from our `index.html`
-  ```
+  ```python
   from django.shortcuts import render
 
   # Create your views here.
@@ -95,7 +102,7 @@ There are two choice for you.
   ```
 
   Create `login\urls.py` to route url to our views
-  ```
+  ```python
   from django.conf.urls import url
 
   from . import views
@@ -116,7 +123,7 @@ There are two choice for you.
 
 7. Create Register form & Login form
   Edit `login\templates\login\index.html`
-  ```
+  ```html
   <!Doctype html>
   <html>
   <header>
@@ -137,7 +144,7 @@ There are two choice for you.
   ```
 
   Create `login\templates\login\register.html`
-  ```
+  ```html
   <!Doctype html>
   <html>
   <header>
@@ -160,7 +167,7 @@ There are two choice for you.
   ```
 
   Edit `login\views.py` to render our register page
-  ```
+  ```python
   from django.shortcuts import render
 
   # Create your views here.
@@ -173,7 +180,7 @@ There are two choice for you.
   ```
 
   Edit `login\urls.py` to route to our register page
-  ```
+  ```python
   from django.conf.urls import url
 
   from . import views
@@ -302,6 +309,6 @@ There are two choice for you.
   ]
   ```
 
-  Now let's try to create our user `http://localhost:8000/login/register/` and try to login it!
+  Now let's try to create our user `<http://localhost:8000/login/register/>` and try to login it!
 
   Wow! it work!
