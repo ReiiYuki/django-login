@@ -9,7 +9,7 @@ MySQL
 There are two choice for you.
 
 1. Install this following Requirement on your environment.
-...
+
 ```
 Django==1.10.1
 mysqlclient==1.3.7
