@@ -112,4 +112,85 @@ There are two choice for you.
   djangologin$ python manage.py runserver
   ```
 
-  Go to <http://localhost:8000/login/> and see what happen!
+  Go to `<http://localhost:8000/login/>` and see what happen!
+
+7. Create Register form & Login form
+  Edit `login\templates\login\index.html`
+  ```
+  <!Doctype html>
+  <html>
+  <header>
+    <meta charset="utf-8">
+    <title>Login</title>
+  </header>
+  <body>
+    <h1>Login</h1>
+    <form>
+      Username:<br>
+      <input type="text" name="username"><br>
+      Password:<br>
+      <input type="text" name="password"><br>
+      <input type="submit" value="Login">
+    </form>
+  </body>
+  </html>
+  ```
+
+  Create `login\templates\login\register.html`
+  ```
+  <!Doctype html>
+  <html>
+  <header>
+    <meta charset="utf-8">
+    <title>Register</title>
+  </header>
+  <body>
+    <h1>Register</h1>
+    <form>
+      Username:<br>
+      <input type="text" name="username"><br>
+      Password:<br>
+      <input type="text" name="password"><br>
+      Email:<br>
+      <input type="text" name="email"><br>
+      <input type="submit" value="Register">
+    </form>
+  </body>
+  </html>
+  ```
+
+  Edit `login\views.py` to render our register page
+  ```
+  from django.shortcuts import render
+
+  # Create your views here.
+
+  def index(request) :
+      return render(request,'login/index.html')
+
+  def register_view(request) :
+      return render(request,'login/register.html')
+  ```
+
+  Edit `login\urls.py` to route to our register page
+  ```
+  from django.conf.urls import url
+
+  from . import views
+
+  app_name = 'login'
+
+  urlpatterns = [
+      url(r'^$', views.index, name='index'),
+      url(r'^register/$',views.register_view, name='register_view'),
+  ]
+  ```
+  Let run!
+  ```
+  djangologin$ python manage.py runserver
+  ```
+
+  Go to `<http://localhost:8000/login/>` and see what happen!
+  Go to `<http://localhost:8000/login/register>` and see what happen!
+
+  Wow! we got the form!
