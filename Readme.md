@@ -198,7 +198,7 @@ There are two choice for you.
 
 8. Make the form active
   First, we modify our `login\templates\login\register.html`
-  ```
+  ```html
   <!Doctype html>
   <html>
   <header>
@@ -222,7 +222,7 @@ There are two choice for you.
   ```
 
   Then modify `login\templates\login\index.html`
-  ```
+  ```html
   <!Doctype html>
   <html>
   <header>
@@ -244,7 +244,7 @@ There are two choice for you.
   ```
 
   Then I modify `login\views.py` to have method which receive data from form
-  ```
+  ```python
   from django.shortcuts import render
   from django.http import HttpResponseRedirect,HttpResponse
   from django.urls import reverse
@@ -286,7 +286,7 @@ There are two choice for you.
 ```
 
   After that we modify `login\urls.py` to create route to each views
-  ```
+  ```python
   from django.conf.urls import url
 
   from . import views
