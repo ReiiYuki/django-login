@@ -16,9 +16,9 @@ There are two choice for you.
 
 2. Use our Virtual Environment by do following step
   ```
-  $cd env/Scripts
-  env/Scripts$activate
-  (env) env/Scripts cd ../..
+  $ cd env/Scripts
+  env/Scripts$ activate
+  (env) env/Scripts$ cd ../..
   ```
 
 ##Step by step
@@ -30,7 +30,7 @@ There are two choice for you.
 
 2. Initialize App
   ```
-  djangologin$python manage.py startapp login
+  djangologin$ python manage.py startapp login
   ```
 
 3. Edit Django to use MySQL Database
@@ -49,7 +49,7 @@ There are two choice for you.
   ```
   Migrate database
   ```
-  djangologin$python manage.py migrate
+  djangologin$ python manage.py migrate
   ```
 
 4. Connect your app with your project
@@ -109,7 +109,7 @@ There are two choice for you.
 
   Let run!
   ```
-  djangologin$python manage.py runserver
+  djangologin$ python manage.py runserver
   ```
 
   Go to <http://localhost:8000/login/> and see what happen!
