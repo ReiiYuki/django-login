@@ -7,17 +7,14 @@ import django.contrib.auth  as auth
 # Create your views here.
 
 def index(request) :
-    print(request.user)
     return render(request,'login/index.html')
 
 def register_view(request) :
-    print(request.POST)
     return render(request,'login/register.html')
 
 def success(request) :
-    print (request.user)
     user = request.user
-    return HttpResponse("Welcome %s"%user.username)
+    return render(request,'login/user.html',{'user':user})
 
 def register(request) :
     username = request.POST['username']
@@ -28,6 +25,8 @@ def register(request) :
     return HttpResponseRedirect(reverse('login:index'))
 
 def login(request) :
+    if request.POST['action'] == 'Register' :
+        return HttpResponseRedirect(reverse('login:register_view'))
     username = request.POST['username']
     password = request.POST['password']
     user = auth.authenticate(username=username, password=password)
@@ -36,3 +35,7 @@ def login(request) :
         return HttpResponseRedirect(reverse('login:success'))
     else :
         return HttpResponseRedirect(reverse('login:index'))
+
+def logout(request) :
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('login:index'))

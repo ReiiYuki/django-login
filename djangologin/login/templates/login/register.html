@@ -2,19 +2,30 @@
 <html>
 <header>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <title>Register</title>
 </header>
 <body>
-  <h1>Register</h1>
-  <form action="{% url 'login:register' %}" method="post">
-    {% csrf_token %}
-    Username:<br>
-    <input type="text" name="username"><br>
-    Password:<br>
-    <input type="password" name="password"><br>
-    Email:<br>
-    <input type="email" name="email"><br>
-    <input type="submit" value="Register">
-  </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+        <h1>Register</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-xs-12 col-sm-8 col-lg-6">
+        <form class="form-group" action="{% url 'login:register' %}" method="post">
+          {% csrf_token %}
+          Username:<br>
+          <input class="form-control" type="text" name="username"><br>
+          Password:<br>
+          <input class="form-control" type="password" name="password"><br>
+          Email:<br>
+          <input class="form-control" type="email" name="email"><br>
+          <input class="btn btn-primary" type="submit" value="Register">
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -285,23 +285,23 @@ There are two choice for you.
           return HttpResponseRedirect(reverse('login:index'))
 ```
 
-After that we modify `login\urls.py` to create route to each views
-```
-from django.conf.urls import url
+  After that we modify `login\urls.py` to create route to each views
+  ```
+  from django.conf.urls import url
 
-from . import views
+  from . import views
 
-app_name = 'login'
+  app_name = 'login'
 
-urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^register/$',views.register_view, name='register_view'),
-    url(r'^register/register/$',views.register,name='register'),
-    url(r'^login/$',views.login,name='login'),
-    url(r'^success/$',views.success,name='success')
-]
-```
+  urlpatterns = [
+      url(r'^$', views.index, name='index'),
+      url(r'^register/$',views.register_view, name='register_view'),
+      url(r'^register/register/$',views.register,name='register'),
+      url(r'^login/$',views.login,name='login'),
+      url(r'^success/$',views.success,name='success')
+  ]
+  ```
 
-Now let's try to create our user `http://localhost:8000/login/register/` and try to login it!
+  Now let's try to create our user `http://localhost:8000/login/register/` and try to login it!
 
-Wow! it work!
+  Wow! it work!

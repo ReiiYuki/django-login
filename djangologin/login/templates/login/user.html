@@ -9,19 +9,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-        <h1>Login</h1>
+        <h1>Welcome {{user.username}}</h1>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 col-xs-12 col-sm-8 col-lg-6">
-        <form class="form-group" action="{% url 'login:login' %}" method="post">
+        <form class="form-group" action="{% url 'login:logout' %}" method="post">
           {% csrf_token %}
-          Username:<br>
-          <input class="form-control" type="text" name="username"><br>
-          Password:<br>
-          <input class="form-control" type="password" name="password"><br>
-          <input class="btn btn-primary" type="submit" name="action" value="Login">
-          <input class="btn btn-primary" type="submit" name="action" value="Register">
+          <input class="btn btn-danger" type="submit" value="Logout">
         </form>
       </div>
     </div>
