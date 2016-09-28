@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'login.apps.LoginConfig', #Connect your login app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,11 +77,11 @@ WSGI_APPLICATION = 'djangologin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST' : 'localhost',  #You can fill these with your DATABASE Host
-        'NAME': 'login-tutorial',   #You can fill these with your DATABASE name
-        'USER' : 'root', #You can fill these with your user in database
-        'PASSWORD' : '', #You can fill these with your password
-        'PORT' : '3306' #You can fill these with your database port
+        'HOST' : 'localhost',  #You can fill this with your DATABASE Host
+        'NAME': 'login-tutorial',   #You can fill this with your DATABASE name
+        'USER' : 'root', #You can fill this with your user in database
+        'PASSWORD' : '', #You can fill this with your password
+        'PORT' : '3306' #You can fill this with your database port
     }
 }
 

@@ -35,16 +35,29 @@ djangologin$python manage.py startapp login
 ```
 
 3. Edit Django to use MySQL Database
-In `djangologin\settings.py` edit these part  
+In `djangologin\settings.py` edit this part  
 ```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST' : 'localhost',  #You can fill these with your DATABASE Host
-        'NAME': 'login-tutorial',   #You can fill these with your DATABASE name
-        'USER' : 'root', #You can fill these with your user in database
-        'PASSWORD' : '', #You can fill these with your password
-        'PORT' : '3306' #You can fill these with your database port
+        'HOST' : 'localhost',  #You can fill this with your DATABASE Host
+        'NAME': 'login-tutorial',   #You can fill this with your DATABASE name
+        'USER' : 'root', #You can fill this with your user in database
+        'PASSWORD' : '', #You can fill this with your password
+        'PORT' : '3306' #You can fill this with your database port
     }
 }
 ```
+Migrate database
+```
+djangologin$python manage.py migrate
+```
+
+4. Connect your app with your project
+In `djangologin\settings.py` add this
+```
+INSTALLED_APPS = [
+    'login.apps.LoginConfig', #Connect your login app
+```
+
+5. 
