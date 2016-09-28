@@ -16,3 +16,10 @@ $cd env/Scripts
 env/Scripts$activate
 (env) env/Scripts cd ../..
 ```
+
+##Step by step
+1. Start Django Project
+
+```
+django-admin startproject djangologin
+```
