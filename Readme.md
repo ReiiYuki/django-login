@@ -191,6 +191,6 @@ There are two choice for you.
   ```
 
   Go to `<http://localhost:8000/login/>` and see what happen!
-  Go to `<http://localhost:8000/login/register>` and see what happen!
+  Go to `<http://localhost:8000/login/register/>` and see what happen!
 
   Wow! we got the form!
