@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
 import django.contrib.auth  as auth
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -12,6 +13,7 @@ def index(request) :
 def register_view(request) :
     return render(request,'login/register.html')
 
+@login_required
 def success(request) :
     user = request.user
     return render(request,'login/user.html',{'user':user})
@@ -20,7 +22,9 @@ def register(request) :
     username = request.POST['username']
     password = request.POST['password']
     email = request.POST['email']
-    user = User.objects.create_user(username,email,password)
+    firstname = request.POST['firstname']
+    lastname = request.POST['lastname']
+    user = User.objects.create_user(username,email,password,first_name=firstname,last_name=lastname)
     user.save()
     return HttpResponseRedirect(reverse('login:index'))
 
