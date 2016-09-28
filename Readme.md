@@ -21,5 +21,11 @@ env/Scripts$activate
 1. Start Django Project
 
 ```
-django-admin startproject djangologin
+$django-admin startproject djangologin
+$cd djangologin
+```
+
+2. Initialize App
+```
+djangologin$python manage.py startapp login
 ```
