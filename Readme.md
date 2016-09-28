@@ -13,8 +13,8 @@ There are two choice for you.
 ```
 Django==1.10.1
 mysqlclient==1.3.7
-```
-.
+.```
+
 2. Use our Virtual Environment by do following step
 ```
 $cd env/Scripts
