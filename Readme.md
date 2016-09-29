@@ -312,3 +312,174 @@ There are two choice for you.
   Now let's try to create our user `http://localhost:8000/login/register/` and try to login it!
 
   Wow! it work!
+
+9. Last Step we will make it beautiful and the page after login
+
+  First Let modify out `login/templates/login/index.html` to have some button to connect to register page and we apply bootstrap css to it.
+  ```html
+  <!Doctype html>
+  <html>
+  <header>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Login</title>
+  </header>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+          <h1>Login</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-sm-8 col-lg-6">
+          <form class="form-group" action="{% url 'login:login' %}" method="post">
+            {% csrf_token %}
+            Username:<br>
+            <input class="form-control" type="text" name="username"><br>
+            Password:<br>
+            <input class="form-control" type="password" name="password"><br>
+            <input class="btn btn-primary" type="submit" name="action" value="Login">
+            <input class="btn btn-primary" type="submit" name="action" value="Register">
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  ```
+
+  Let's modify our `login/templates/login/register.html` to use bootstrap css too
+  ```html
+  <!Doctype html>
+  <html>
+  <header>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Register</title>
+  </header>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+          <h1>Register</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-sm-8 col-lg-6">
+          <form class="form-group" action="{% url 'login:register' %}" method="post">
+            {% csrf_token %}
+            Username:<br>
+            <input class="form-control" type="text" name="username"><br>
+            Password:<br>
+            <input class="form-control" type="password" name="password"><br>
+            Firstname:<br>
+            <input class="form-control" type="text" name="firstname"><br>
+            Lastname:<br>
+            <input class="form-control" type="text" name="lastname"><br>
+            Email:<br>
+            <input class="form-control" type="email" name="email"><br>
+            <input class="btn btn-primary" type="submit" value="Register">
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  ```
+
+  Now we create new html file call `login/templates/login/user.html`
+  ```html
+  <!Doctype html>
+  <html>
+  <header>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Login</title>
+  </header>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+          <h1>Welcome {{user.username}}</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-sm-8 col-lg-6">
+          <form class="form-group" action="{% url 'login:logout' %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="Logout">
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  ```
+
+  So we have to modify `login\views.py` to work with that.
+  ```python
+  from django.shortcuts import render
+  from django.http import HttpResponseRedirect,HttpResponse
+  from django.urls import reverse
+  from django.contrib.auth.models import User
+  import django.contrib.auth  as auth
+  from django.contrib.auth.decorators import login_required
+
+  # Create your views here.
+
+  def index(request) :
+      return render(request,'login/index.html')
+
+  def register_view(request) :
+      return render(request,'login/register.html')
+
+  @login_required
+  def success(request) :
+      user = request.user
+      return render(request,'login/user.html',{'user':user})
+
+  def register(request) :
+      username = request.POST['username']
+      password = request.POST['password']
+      email = request.POST['email']
+      firstname = request.POST['firstname']
+      lastname = request.POST['lastname']
+      user = User.objects.create_user(username,email,password,first_name=firstname,last_name=lastname)
+      user.save()
+      return HttpResponseRedirect(reverse('login:index'))
+
+  def login(request) :
+      if request.POST['action'] == 'Register' :
+          return HttpResponseRedirect(reverse('login:register_view'))
+      username = request.POST['username']
+      password = request.POST['password']
+      user = auth.authenticate(username=username, password=password)
+      if user is not None :
+          auth.login(request,user)
+          return HttpResponseRedirect(reverse('login:success'))
+      else :
+          return HttpResponseRedirect(reverse('login:index'))
+
+  def logout(request) :
+      auth.logout(request)
+      return HttpResponseRedirect(reverse('login:index'))
+  ```
+
+  The edit our `login/urls.py`
+  ```python
+  from django.conf.urls import url
+
+  from . import views
+
+  app_name = 'login'
+
+  urlpatterns = [
+      url(r'^$', views.index, name='index'),
+      url(r'^register/$',views.register_view, name='register_view'),
+      url(r'^register/register/$',views.register,name='register'),
+      url(r'^login/$',views.login,name='login'),
+      url(r'^success/$',views.success,name='success'),
+      url(r'^logout/$',views.logout,name='logout'),
+  ]
+  ```
